@@ -1,0 +1,18 @@
+body{
+    background-color: rgb(214, 209, 207);
+}
+
+h2{
+    text-align: center;
+}
+
+div{
+    margin-left: 600px;
+}
+form{
+    display: table;
+}
+
+input{
+    margin-left: 50px;
+}

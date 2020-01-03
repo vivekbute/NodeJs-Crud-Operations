@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Application</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- <form action="/addMenu" method="GET"> -->
+        <table border="1" class="menu-table"> 
+            <tr>
+                <thead>
+                    <th>Id</th>
+                    <th>Item</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                    <th>Add To Cart</th>
+                </thead>
+            </tr>
+            <tbody id="emp-table"> 
+                <tr>
+                    <td id="id"></td>
+                    <td id="Item"></td>
+                    <td id="url"></td>
+                    <td id="Price"></td>
+                </tr>
+            </tbody>  
+        </table><br><br>
+        <input type="submit" id="btnSubmit" name="btnSubmit" onclick="addItem()" value="Add Item">
+        <input type="submit" onclick="logout()" value="Logout">
+    <!-- </form> -->
+    <script>
+            // // const $ =require("jquery");
+            $(document).ready(() => {
+                $.ajax({
+                    url: "/MenuItems",
+                    method: "GET",
+                    data: {},
+                    success: data => {
+                        console.log(data);
+                        // console.log("inside success");
+                        let rowData = "";
+                        data.forEach(item => {
+                            rowData += `<tr><td>${item.id}</td><td>${item.Item}</td>
+                                <td><img style="height:50px;width:50px" src="${item.url}"></td>
+                                <td>${item.Price}</td><td><input type="submit" value="Update" onclick=update(${item.id})></td>
+                                <td><input type="submit" value="Delete" onclick=deleteFunction(${item.id})></td>
+                                <td><input type="submit" value="Add To Cart" onclick=addToCart(${item.id})></td></tr>`;
+                        });
+                        // console.log(rowData);
+                        $("#emp-table").html(rowData);
+                    }
+                });
+            });
+
+            function addItem(){
+                window.location = "http://localhost:4000/addMenu"
+            }
+
+            function update(id){
+                // console.log(id);
+                // // ajax, put the details on update route
+                // $(document).ready(()=>{
+                //     $.ajax({
+                //         url :'/',
+                //         method:'GET',
+                //         data: {},
+
+                //     })
+                // })
+                window.location = "/update/"+id;
+            }
+
+            function deleteFunction(id){
+                console.log(id)
+                window.location = "/deleteItem/"+id;
+            }
+
+            function addToCart(id){
+                window.location = "/addToCart/"+id;
+            }
+            function logout(){
+                window.location = "/logout"
+            }
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+body{
+    background-color: #e6eff4;
+}
+
+table{
+    width: 100%;
+    text-align: center;
+}
+
+#btnSubmit{
+    margin-left: 45%;
+    font-size: 400px;
+}
